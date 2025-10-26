@@ -1,0 +1,12 @@
+# # 백엔드 서버 헬스 체크
+# GET http://localhost:4000/health
+# Content-Type: application/json
+
+# # GPT API 호출 테스트
+# POST http://localhost:4000/api/generate
+# Content-Type: application/json
+
+# {
+#   "userId": "60c72b2f9b1e8b001c8e3b1c",
+#   "prompt": "'안녕'을 출력"
+# }

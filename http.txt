@@ -1,0 +1,8 @@
+프론트 웹 페이지 : http://localhost:3000
+웹 실행 : ai-hub-web이동, npm run dev입력
+
+데이터 베이스 check : http://localhost:4000/db-check
+MongoDB 실행 : 터미널(관리자 권한) 실행, mongod입력
+backend 서버 실행 : ai-hub-backend이동, node src/severs.js입력
+
+AI 호출 요청 : http://localhost:4000/api/generate
