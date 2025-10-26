@@ -1,6 +1,7 @@
 {
   "name": "ai-hub-web",
   "version": "0.1.0",
+  "description": "AI Hub Frontend - Component-Based Architecture",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",

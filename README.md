@@ -1,125 +1,181 @@
-🚀 MindGuide (마인가이드)
+# AI Hub - 객체 지향 프로그래밍 아키텍처
 
-MindGuide는 사용자의 복잡한 고민을 정리하고, 명확한 목표 달성을 위한 맞춤형 로드맵을 생성해주는 AI 기반 웹 애플리케이션입니다.
+이 프로젝트는 객체 지향 프로그래밍 원칙에 따라 기능별로 파일을 나누어 구성된 AI 기반 대화 및 로드맵 생성 애플리케이션입니다.
 
-✨ 주요 기능
+## 📁 프로젝트 구조
 
-이 프로젝트는 두 가지 핵심 모드를 제공합니다.
+```
+ai-hub-backend/
+├── src/
+│   ├── controllers/          # 컨트롤러 레이어
+│   │   ├── ConversationController.js
+│   │   └── RoadmapController.js
+│   ├── services/            # 서비스 레이어
+│   │   ├── OpenAIService.js
+│   │   ├── ConversationService.js
+│   │   └── RoadmapService.js
+│   ├── routes/              # 라우터 레이어
+│   │   ├── ConversationRouter.js
+│   │   └── RoadmapRouter.js
+│   ├── models/              # 데이터 모델
+│   │   └── Conversation.js
+│   └── server.js            # 메인 서버 파일
+├── package.json
+└── README.md
 
-1. 💭 고민 정리 모드
+ai-hub-web/
+├── src/
+│   ├── app/                 # Next.js 앱 라우터
+│   │   ├── page.tsx         # 메인 페이지
+│   │   ├── layout.tsx
+│   │   └── globals.css
+│   ├── components/          # React 컴포넌트
+│   │   ├── common/         # 공통 컴포넌트
+│   │   │   ├── Modal.tsx
+│   │   │   └── ChatInputForm.tsx
+│   │   ├── pages/          # 페이지 컴포넌트
+│   │   │   ├── InfoPage.tsx
+│   │   │   └── SettingsPage.tsx
+│   │   ├── layout/         # 레이아웃 컴포넌트
+│   │   │   └── Sidebar.tsx
+│   │   ├── roadmap/        # 로드맵 관련 컴포넌트
+│   │   │   └── AiGuidePanel.tsx
+│   │   └── icons/          # 아이콘 컴포넌트
+│   │       └── index.tsx
+│   ├── hooks/              # 커스텀 훅
+│   │   ├── useConversation.ts
+│   │   ├── useConversationList.ts
+│   │   └── useRoadmap.ts
+│   └── types/              # TypeScript 타입 정의
+│       └── index.ts
+├── package.json
+└── README.md
+```
 
-AI 챗봇 상담: 사용자가 자유롭게 자신의 생각이나 고민을 입력하면, AI가 대화를 이끌며 생각을 명확히 하도록 돕습니다.
+## 🏗️ 아키텍처 설계 원칙
 
-정리본 생성: 대화 내용을 바탕으로 '정리본 생성' 버튼을 누르면, AI가 현재 상황, 문제 원인, 핵심 요약, 조언 등을 포함한 요약 리포트를 생성합니다.
+### 백엔드 (Node.js + Express)
 
-2. 🚀 로드맵 생성 모드
+#### 1. 서비스 레이어 (Services)
+- **OpenAIService**: OpenAI API와의 통신을 담당
+- **ConversationService**: 대화 데이터 관리 및 CRUD 작업
+- **RoadmapService**: 로드맵 생성 및 관리 로직
 
-다단계 정보 수집: 사용자의 최종 목표, 투자 가능 시간, 예산 등을 AI가 순차적으로 질문하여 구체적인 계획 수립에 필요한 정보를 수집합니다.
+#### 2. 컨트롤러 레이어 (Controllers)
+- **ConversationController**: 대화 관련 HTTP 요청 처리
+- **RoadmapController**: 로드맵 관련 HTTP 요청 처리
 
-맞춤형 로드맵 생성: 수집된 정보를 바탕으로, 사용자의 목표를 달성하기 위한 '중간 목표'와 '세부 행동 단계'로 구성된 체계적인 로드맵을 생성합니다.
+#### 3. 라우터 레이어 (Routers)
+- **ConversationRouter**: 대화 관련 라우트 정의
+- **RoadmapRouter**: 로드맵 관련 라우트 정의
 
-AI 비교/선택 가이드:
+### 프론트엔드 (Next.js + React + TypeScript)
 
-로드맵의 각 '세부 행동 단계'마다 'AI 도움 받기' 기능이 활성화됩니다.
+#### 1. 컴포넌트 기반 설계
+- **공통 컴포넌트**: 재사용 가능한 UI 컴포넌트
+- **페이지 컴포넌트**: 각 페이지별 전용 컴포넌트
+- **레이아웃 컴포넌트**: 전체 레이아웃 관리
+- **기능별 컴포넌트**: 특정 기능에 특화된 컴포넌트
 
-버튼 클릭 시, 해당 단계를 수행하는 데 가장 도움이 되는 AI 도구 목록(URL, 특화 분야, 비용 정보 포함)과 추천 사유가 포함된 가이드 패널이 나타납니다.
+#### 2. 커스텀 훅 (Custom Hooks)
+- **useConversation**: 대화 상태 및 로직 관리
+- **useConversationList**: 대화 목록 관리
+- **useRoadmap**: 로드맵 상태 및 로직 관리
 
-사용자는 가이드 내에서 AI별 '추천 프롬프트'를 바로 확인하고 활용할 수 있습니다.
+#### 3. 타입 시스템
+- TypeScript를 활용한 강타입 시스템
+- 인터페이스와 타입 별칭을 통한 타입 안정성
 
-3. 📒 대화 관리
+## 🚀 주요 기능
 
-대화 기록: '고민 정리'와 '로드맵 생성'을 포함한 모든 지난 대화 목록을 사이드바에서 확인할 수 있습니다.
+### 백엔드 API
+- **POST /message**: 메시지 전송 및 AI 응답
+- **GET /conversations**: 대화 목록 조회
+- **GET /conversation/:id**: 특정 대화 조회
+- **PUT /conversations/:id**: 대화 제목 수정
+- **DELETE /conversations/:id**: 대화 삭제
+- **POST /conversation/summarize**: 대화 요약 생성
+- **POST /roadmap/generate**: 로드맵 생성
+- **POST /roadmap/ai-help**: AI 도움 정보 제공
 
-유형 구분: 각 대화가 '고민 정리'(💭)인지 '로드맵 생성'(🚀)인지 아이콘으로 쉽게 구분할 수 있습니다.
+### 프론트엔드 기능
+- **대화 인터페이스**: 실시간 채팅 UI
+- **로드맵 시각화**: 단계별 로드맵 표시
+- **AI 가이드 패널**: AI 도구 추천 및 프롬프트 제공
+- **대화 관리**: 대화 목록, 편집, 삭제
+- **반응형 디자인**: 다양한 화면 크기 지원
 
-수정 및 삭제: 각 대화 항목의 메뉴(…) 버튼을 통해 대화 제목을 수정하거나 대화를 영구적으로 삭제할 수 있습니다.
+## 🛠️ 설치 및 실행
 
-🛠️ 기술 스택
-
-프론트엔드: React (Next.js), TypeScript, Tailwind CSS
-
-백엔드: Node.js, Express
-
-데이터베이스: MongoDB, Mongoose
-
-AI: OpenAI API (GPT-4o, GPT-3.5-Turbo)
-
-기타: dotenv (환경 변수 관리)
-
-🏁 시작하기
-
-이 프로젝트를 로컬 환경에서 실행하는 방법입니다.
-
-1. 사전 준비
-
-Node.js (v18 이상 권장)
-
-MongoDB (로컬 설치)
-
-npm 또는 yarn
-
-OpenAI API 키
-
-2. 설치 및 실행
-
-1. 백엔드 (Node.js / Express)
-
-프로젝트 루트 디렉토리( server.js 파일이 있는 곳)에서 다음을 실행합니다.
-
-# 1. 필요한 패키지 설치
+### 백엔드 실행
+```bash
+cd ai-hub-backend
 npm install
-
-# 2. .env 파일 생성 및 설정
-# (제공해주신 .env 파일을 기반으로 작성)
-
-
-.env 파일에 아래와 같이 MongoDB 접속 URI와 OpenAI API 키를 입력합니다.
-
-# MongoDB Database
-MONGO_URI="mongodb://localhost:27017/mindguide-db"
-
-# OpenAI API Key
-OPENAI_API_KEY="sk-..."
-
-
-# 3. (별도의 터미널) MongoDB 서버 실행
-# 사용자님께서 말씀하신 방식대로 로컬 MongoDB 서버를 먼저 실행합니다.
-mongod
-
-# 4. 백엔드 서버 실행
-node server.js
-# 또는 nodemon을 설치했다면: nodemon server.js
-
-
-서버가 http://localhost:4000 (또는 지정된 포트)에서 실행됩니다.
-
-2. 프론트엔드 (React / Next.js)
-
-프론트엔드 디렉토리(page.tsx 파일이 있는 곳)로 이동하여 다음을 실행합니다.
-
-# 1. 필요한 패키지 설치
-npm install
-
-# 2. 프론트엔드 개발 서버 실행
 npm run dev
+```
 
+### 프론트엔드 실행
+```bash
+cd ai-hub-web
+npm install
+npm run dev
+```
 
-애플리케이션이 http://localhost:3000 에서 열립니다.
+## 📋 환경 변수 설정
 
-📌 API 엔드포인트
+백엔드 `.env` 파일에 다음 변수들을 설정해야 합니다:
+```
+MONGO_URI=mongodb://localhost:27017/ai-hub
+OPENAI_API_KEY=your_openai_api_key
+PORT=4000
+```
 
-POST /message: 새 메시지를 전송하고 AI 응답을 받습니다.
+## 🎯 객체 지향 프로그래밍 원칙 적용
 
-POST /conversation/summarize: '고민 정리' 대화의 요약본을 생성합니다.
+### 1. 단일 책임 원칙 (SRP)
+- 각 클래스와 함수는 하나의 책임만 가짐
+- 서비스, 컨트롤러, 라우터가 명확히 분리됨
 
-POST /roadmap/generate: '로드맵 생성'을 위한 정보를 바탕으로 로드맵을 생성합니다.
+### 2. 개방-폐쇄 원칙 (OCP)
+- 새로운 기능 추가 시 기존 코드 수정 없이 확장 가능
+- 인터페이스 기반 설계로 유연성 확보
 
-POST /roadmap/ai-help: 특정 로드맵 단계에 대한 'AI 도움 가이드' 정보를 요청합니다.
+### 3. 의존성 역전 원칙 (DIP)
+- 고수준 모듈이 저수준 모듈에 의존하지 않음
+- 의존성 주입을 통한 느슨한 결합
 
-GET /conversations: 모든 대화 목록을 조회합니다.
+### 4. 인터페이스 분리 원칙 (ISP)
+- 클라이언트가 사용하지 않는 인터페이스에 의존하지 않음
+- 필요한 기능만 노출하는 인터페이스 설계
 
-GET /conversation/:id: 특정 대화의 상세 내용을 불러옵니다.
+## 🔧 기술 스택
 
-PUT /conversations/:id: 대화 제목을 수정합니다.
+### 백엔드
+- **Node.js**: JavaScript 런타임
+- **Express.js**: 웹 프레임워크
+- **MongoDB**: NoSQL 데이터베이스
+- **Mongoose**: MongoDB ODM
+- **Axios**: HTTP 클라이언트
 
-DELETE /conversations/:id: 대화를 삭제합니다.
+### 프론트엔드
+- **Next.js**: React 프레임워크
+- **React**: UI 라이브러리
+- **TypeScript**: 정적 타입 언어
+- **Tailwind CSS**: CSS 프레임워크
+
+## 📈 확장 가능성
+
+이 아키텍처는 다음과 같은 확장이 용이합니다:
+- 새로운 AI 서비스 추가
+- 추가적인 대화 타입 지원
+- 사용자 인증 시스템 통합
+- 실시간 알림 기능
+- 다국어 지원
+
+## 🤝 기여하기
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request

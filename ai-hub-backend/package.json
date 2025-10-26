@@ -1,13 +1,16 @@
 {
   "name": "ai-hub-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "AI Hub Backend - API-based MongoDB Storage",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test:prompts": "node src/prompts/test.js",
+    "validate:prompts": "node -e \"const { PromptValidator } = require('./src/prompts/utils'); const validator = new PromptValidator(); validator.validateAll();\"",
+    "benchmark:prompts": "node -e \"const { PromptTester } = require('./src/prompts/utils'); const tester = new PromptTester(); tester.benchmarkPrompt('generateTitle', { content: '테스트' }, 100);\""
   },
-  "keywords": [],
+  "keywords": ["ai", "chat", "roadmap", "nodejs", "express", "mongodb-api"],
   "author": "",
   "license": "ISC",
   "dependencies": {
