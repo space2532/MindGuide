@@ -74,6 +74,7 @@ export const useConversation = () => {
         conversationType,
         setConversationType,
         messages,
+        setMessages,
         roadmap,
         setRoadmap,
         roadmapState,
