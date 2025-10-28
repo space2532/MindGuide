@@ -1,0 +1,23 @@
+[33mcommit 1ff21bfaf2ba01a36fe1b499d37d1e156a393a44[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mfeature/new-design[m[33m)[m
+Author: Jung Danwoo <space10423@gmail.com>
+Date:   Tue Oct 28 13:37:59 2025 +0900
+
+    객체 지향 프로그래밍
+
+[33mcommit 5a3dc0b0be51200b9a2590f94e53f569230dae66[m[33m ([m[1;31morigin/pach[m[33m, [m[1;31morigin/feature/new-design[m[33m)[m
+Author: Jung Danwoo <space10423@gmail.com>
+Date:   Sun Oct 26 15:44:07 2025 +0900
+
+    오류 수정
+
+[33mcommit 75628d20334b4f470271982f161ffc47b9159dc7[m
+Author: Jung Danwoo <space10423@gmail.com>
+Date:   Sun Oct 26 12:44:57 2025 +0900
+
+    대규모 수정 사항 반영
+
+[33mcommit a12e457315762acd99de7547c3cc0b86c4a5ad04[m
+Author: Jung Danwoo <space10423@gmail.com>
+Date:   Sun Oct 26 10:56:56 2025 +0900
+
+    Initial commit: MindGuide 프로젝트 설정

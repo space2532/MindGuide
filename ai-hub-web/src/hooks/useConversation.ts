@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Conversation, Message, Roadmap, RoadmapState, RoadmapStep, AiGuideData, DisplayedPrompt } from '../types';
 
-const BASE_API_URL = 'http://localhost:4000';
+const BASE_API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
 export const useConversation = () => {
     const [conversationId, setConversationId] = useState<string | null>(null);

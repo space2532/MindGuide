@@ -79,6 +79,21 @@ const roadmapRouter = new RoadmapRouter(roadmapController);
 app.use('/', conversationRouter.getRouter()); // Assuming router handles '/conversations', '/conversation/:id' etc.
 app.use('/', roadmapRouter.getRouter());    // Assuming router handles '/roadmap/generate', '/roadmap/ai-help' etc.
 
+// 모든 next(error)는 여기로 와서 JSON으로 응답합니다.
+app.use((err, req, res, next) => {
+    console.error('❌ Global Error Handler:', err.message);
+    console.error(err.stack);
+    
+    // 이미 응답이 전송된 경우
+    if (res.headersSent) {
+        return next(err);
+    }
+    
+    res.status(err.status || 500).json({
+        error: err.message || '서버 내부 오류가 발생했습니다.'
+    });
+});
+
 // Start Server
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
