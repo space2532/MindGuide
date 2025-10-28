@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
-import { Roadmap, RoadmapStep, AiGuideData, DisplayedPrompt } from '../types';
+import React, { useState, useCallback } from 'react';
+import { Roadmap, RoadmapStep, AiGuideData, DisplayedPrompt, Message, RoadmapState, ConversationType } from '../types';
 
 const BASE_API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
@@ -60,12 +60,12 @@ export const useRoadmap = () => {
     const handleActionButtonClick = useCallback(async (
         conversationId: string | null,
         isLoading: boolean,
-        conversationType: string,
-        roadmapState: string,
+        conversationType: ConversationType,
+        roadmapState: RoadmapState,
         roadmap: Roadmap | null,
-        setMessages: (fn: (prev: any[]) => any[]) => void,
-        setRoadmap: (roadmap: Roadmap | null) => void,
-        setRoadmapState: (state: string) => void
+        setMessages: React.Dispatch<React.SetStateAction<Message[]>>,
+        setRoadmap: React.Dispatch<React.SetStateAction<Roadmap | null>>,
+        setRoadmapState: React.Dispatch<React.SetStateAction<RoadmapState>>
     ) => {
         if (conversationType === '로드맵 생성' && roadmapState === 'generation_complete' && roadmap) {
             const stepKey = `${currentRoadmapStep.goalIndex}-${currentRoadmapStep.actionIndex}`;
